@@ -1,0 +1,27 @@
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Trading Symbol</th>
+        <th>Exchange</th>
+        <th>Exchange Token</th>
+        <th>Instrument Type</th>
+        <th>Expiry</th>
+        <th>Instrument Token</th>
+        <th>Segment</th>
+    </tr>
+    <tr *ngFor ="let data of BSEStocks| paginate: { itemsPerPage: 100, currentPage: p }; let i = index">
+        <td>{{data.name}}</td>
+        <td>{{data.tradingsymbol}}</td>
+        <td>{{data.exchange}}</td>
+        <td>{{data.exchange_token}}</td>
+        <td>{{data.instrument_type}}</td>
+        <td>{{data.expiry}}</td>
+        <td>{{data.instrument_token}}</td>
+        <td>{{data.segment}}</td>
+    </tr>
+</table>
+<pagination-controls (pageChange)="p = $event"></pagination-controls>
+<!-- <ngx-pagination [total]="NSEStocks.length" [pageSize]="100" (pageChange)="onPageChange($event)"></ngx-pagination> -->
+
+<!-- <mat-paginator [length]="NSEStocks.length" [pageSize]="100" [pageSizeOptions]="[10, 25, 50, 100]"></mat-paginator> -->
+
