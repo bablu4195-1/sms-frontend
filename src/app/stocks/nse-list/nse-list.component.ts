@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { StocksService } from 'src/app/services/stocks/stocks.service';
+import { StockSocketsService } from 'src/app/services/websockets/stock-sockets.service';
 
 @Component({
   selector: 'app-nse-list',
@@ -11,10 +12,12 @@ import { StocksService } from 'src/app/services/stocks/stocks.service';
 export class NseListComponent implements OnInit {
 NSEStocks:any = [];
 p = 1;
+selectedItems:any = [];
 
-constructor(private stocks:StocksService){}
+constructor(private stocks:StocksService,private stockSocket: StockSocketsService){}
 ngOnInit(){
  this.getNSEStocks();
+//  this.getStocks();
 }
 
 getNSEStocks(){
@@ -25,5 +28,30 @@ getNSEStocks(){
     console.log(err);
   });
 
+}
+
+addingItems(data:any,i:any) {
+  // console.log(data);
+  data.isSelected = true;
+  this.selectedItems.push(data['instrument_token']);
+  console.log(this.selectedItems);
+}
+
+getStocks() {
+  this.stockSocket.getStocks(this.selectedItems).subscribe((res:any)=>{
+    console.log(res);
+  },(error)=>{
+    console.log(error);
+  });
+}
+
+saveTOSend(){
+  let data = {
+     items : this.selectedItems,
+     user_id: localStorage.getItem('user_id')
+  }
+  this.stocks.sendStocks(data).subscribe((res:any)=>{
+    console.log(res);
+  });
 }
 }

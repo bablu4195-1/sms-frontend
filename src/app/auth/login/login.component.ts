@@ -32,8 +32,9 @@ export class LoginComponent implements OnInit{
       this.authService.login(this.loginForm.value).subscribe((res:any)=>{
         console.log(res);
         localStorage.setItem('token',res.token);
+        localStorage.setItem('user_id',res.user_id);
         //navigate to stocks nse component
-        this.router.navigate(['stocks/nse']);
+        this.router.navigate(['stocks']);
 
       },(err:any)=>{
         alert( "Error, Please try again" );

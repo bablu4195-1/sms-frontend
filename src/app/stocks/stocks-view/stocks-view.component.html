@@ -1,0 +1,17 @@
+<div>
+    <button (click)="p = 1">BSE</button>
+    <button (click)="p = 2">NSE</button>
+    <button (click)="p = 3">Selected Stocks</button>
+</div>
+
+<div>
+    <div *ngIf="p == 1">
+        <app-bse-list></app-bse-list>
+    </div>
+    <div *ngIf="p == 2">
+        <app-nse-list></app-nse-list>
+    </div>
+    <div *ngIf="p ==3">
+        <app-selected-stocks></app-selected-stocks>
+    </div>
+</div>

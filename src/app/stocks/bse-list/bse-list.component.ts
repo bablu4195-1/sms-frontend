@@ -9,6 +9,7 @@ import { StocksService } from 'src/app/services/stocks/stocks.service';
 export class BseListComponent {
   BSEStocks:any = [];
   p = 1;
+  selectedItems:any = [];
   
   constructor(private stocks:StocksService){}
   ngOnInit(){
@@ -23,5 +24,15 @@ export class BseListComponent {
       console.log(err);
     });
   
+  }
+
+  addingItems(data:any,i:any) {
+    console.log(data);
+    data.isSelected = true;
+    this.selectedItems.push(data['instrument_token']);
+  }
+  saveTOSend() {
+    console.log(localStorage.getItem('user_id'));
+    localStorage.getItem('token');
   }
 }

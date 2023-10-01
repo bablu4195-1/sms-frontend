@@ -15,4 +15,17 @@ export class StocksService {
   getBSEStocks():Observable<any>{
     return this.http.get(`${this.url}/stocks/bse`);
   }
+
+  sendStocks(data:any){
+    return this.http.post(`${this.url}/stocks/selectedItems`,data);
+  }
+
+  selectedStocks(){
+    let id = localStorage.getItem('user_id'); 
+    return this.http.get(`${this.url}/stocks/selectedStocks/${id}`);
+  }
+
+  addPrice(data:any){
+    return this.http.post(`${this.url}/stocks/addPrice`,data);
+  }
 }

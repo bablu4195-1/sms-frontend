@@ -1,3 +1,6 @@
+<div>
+    <button [disabled]="selectedItems.length == 0" (click)="saveTOSend()">DONE</button>
+</div>
 <table>
     <tr>
         <th>Name</th>
@@ -5,19 +8,21 @@
         <th>Exchange</th>
         <th>Exchange Token</th>
         <th>Instrument Type</th>
-        <th>Expiry</th>
+        <!-- <th>Expiry</th> -->
         <th>Instrument Token</th>
         <th>Segment</th>
+        <th>Alerts</th>
     </tr>
-    <tr *ngFor ="let data of NSEStocks| paginate: { itemsPerPage: 100, currentPage: p }; let i = index">
+    <tr *ngFor ="let data of NSEStocks | paginate: { itemsPerPage: 100, currentPage: p }; let i = index">
         <td>{{data.name}}</td>
         <td>{{data.tradingsymbol}}</td>
         <td>{{data.exchange}}</td>
         <td>{{data.exchange_token}}</td>
         <td>{{data.instrument_type}}</td>
-        <td>{{data.expiry}}</td>
+        <!-- <td>{{data.expiry}}</td> -->
         <td>{{data.instrument_token}}</td>
         <td>{{data.segment}}</td>
+        <td><button [disabled]="data.isSelected" (click)="addingItems(data,i)">Set Alert</button></td>
     </tr>
 </table>
 <pagination-controls (pageChange)="p = $event"></pagination-controls>
