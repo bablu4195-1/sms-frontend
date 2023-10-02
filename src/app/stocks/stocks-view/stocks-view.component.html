@@ -1,7 +1,7 @@
-<div>
-    <button (click)="p = 1">BSE</button>
-    <button (click)="p = 2">NSE</button>
-    <button (click)="p = 3">Selected Stocks</button>
+<div class="main-viewer">
+    <button class="component-link" (click)="p = 1">BSE</button>
+    <button class="component-link" (click)="p = 2">NSE</button>
+    <button class="component-link" (click)="p = 3">Selected Stocks</button>
 </div>
 
 <div>
@@ -14,4 +14,8 @@
     <div *ngIf="p ==3">
         <app-selected-stocks></app-selected-stocks>
     </div>
+</div>
+
+<div>
+    <button class="logout-button" (click)="logout()">LogOut</button>
 </div>

@@ -27,7 +27,7 @@ export class BseListComponent {
   }
 
   addingItems(data:any,i:any) {
-    console.log(data);
+    // console.log(data);
     data.isSelected = true;
     this.selectedItems.push(data['instrument_token']);
   }

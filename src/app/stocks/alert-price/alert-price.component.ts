@@ -1,5 +1,5 @@
 import { Component, Input ,Inject} from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { StocksModule } from '../stocks.module';
 import { StocksService } from 'src/app/services/stocks/stocks.service';
 
@@ -10,7 +10,7 @@ import { StocksService } from 'src/app/services/stocks/stocks.service';
 })
 export class AlertPriceComponent {
     price:any;
-    constructor(@Inject(MAT_DIALOG_DATA) public data: any,private stocks: StocksService) { }
+    constructor(@Inject(MAT_DIALOG_DATA) public data: any,private stocks: StocksService,private dialog: MatDialog) { }
     
     ngOnInit(): void {
       this.price = this.data['last_price'];
@@ -25,5 +25,10 @@ export class AlertPriceComponent {
       this.stocks.addPrice(data).subscribe((res:any)=>{
         console.log(res);
       })
+    }
+
+    //close the dialog modal
+    close() {
+      this.dialog.closeAll();
     }
 }

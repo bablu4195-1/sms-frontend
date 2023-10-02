@@ -18,4 +18,10 @@ export class StocksViewComponent implements OnInit {
 //   this.router.navigate(['stocks/selected-stocks']);
 // }
 
+
+logout() {
+  localStorage.removeItem('token');
+  localStorage.removeItem('user_id');
+  this.router.navigate(['login']);
+}
 }

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -7,6 +7,11 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { InterceptInterceptor } from './auth/intercept.interceptor';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireMessagingModule } from '@angular/fire/compat/messaging';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from 'src/environments/environment';
+const firebaseConfig = environment.firebase;
 
 @NgModule({
   declarations: [
@@ -17,7 +22,15 @@ import { RouterModule } from '@angular/router';
     AppRoutingModule,
     RouterModule,
     ReactiveFormsModule,
-    HttpClientModule // Add this for the interceptor
+    HttpClientModule,
+    ServiceWorkerModule.register('firebase-messaging-sw.js', {
+      enabled: !isDevMode(),
+      // Register the ServiceWorker as soon as the application is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    }), // Add this for the interceptor,
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireMessagingModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: InterceptInterceptor, multi: true }

@@ -28,4 +28,13 @@ export class StocksService {
   addPrice(data:any){
     return this.http.post(`${this.url}/stocks/addPrice`,data);
   }
+  
+  alertedStocks(){
+    let id = localStorage.getItem('user_id'); 
+    return this.http.get(`${this.url}/stocks/alertedPrices/${id}`);
+  }
+
+  getfirebaseTokens(data:any) {
+    return this.http.post(`${this.url}/stocks/getfirebaseTokens`,data);
+  }
 }

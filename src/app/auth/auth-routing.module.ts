@@ -6,7 +6,11 @@ const routes: Routes = [
   //lazy loading
   {
     path:'',component:LoginComponent
+  },
+  {
+    path:'login',component:LoginComponent
   }
+
 ];
 
 @NgModule({

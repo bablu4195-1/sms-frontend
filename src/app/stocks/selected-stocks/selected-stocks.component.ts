@@ -15,6 +15,7 @@ export class SelectedStocksComponent implements OnInit {
   
     ngOnInit(): void {
       this.selectedStocksList();
+      this.alertedPrices();
     }
 
   selectedStocksList(){
@@ -36,9 +37,11 @@ export class SelectedStocksComponent implements OnInit {
       height:'500px',
       data:stocks,
     });
+  }
 
-    this.dialog.afterAllClosed.subscribe((res:any)=>{
-      this.selectedStocksList();
+  alertedPrices(){
+    this.stocks.alertedStocks().subscribe((res:any)=>{
+      console.log(res);
     });
   }
 }

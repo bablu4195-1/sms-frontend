@@ -1,0 +1,36 @@
+button {
+    background-color: #0f8007;
+    border: 1px solid #fff;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: bold;
+    transition: all 0.3s ease-in-out;
+}
+.done-button {
+    float: right;
+    margin-bottom: 18px;
+}
+
+.done-button:hover {
+    background-color: #fff;
+    border: 1px solid #0f8007;
+    height:30px;
+    cursor:pointer;
+    color: #0f8007;
+}
+button:disabled {
+    background-color: #ccc;
+    border: 1px solid #ccc;
+    color: #fff;
+    cursor: not-allowed;
+}
+
+tr > td {
+    background-color: #a1a111;
+    border: 1px solid #fff;
+    color: #fff;
+    height: 30px;
+}
