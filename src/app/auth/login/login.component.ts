@@ -61,6 +61,7 @@ export class LoginComponent implements OnInit{
           user_id: localStorage.getItem('user_id')
         }
         this.sendFirstToken(data);
+        this.sendNotification();
       }
       else{
         console.log('No registration token available. Request permission to generate one.');
@@ -77,5 +78,13 @@ export class LoginComponent implements OnInit{
     });
   }
  
+  sendNotification(){
+    let data = {
+      token: localStorage.getItem('fcm_token')
+    }
+    this.stocks.notification(data).subscribe((res:any)=>{
+      console.log(res);
+    });
+  }
 
     }

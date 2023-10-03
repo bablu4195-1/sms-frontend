@@ -37,4 +37,8 @@ export class StocksService {
   getfirebaseTokens(data:any) {
     return this.http.post(`${this.url}/stocks/getfirebaseTokens`,data);
   }
+
+  notification(data:any){
+    return this.http.post(`${this.url}/notify/notification`,data);
+  }
 }
