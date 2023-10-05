@@ -1,9 +1,12 @@
+<div class="search-container">
+<input class="search-bar" type="text" [(ngModel)]="search" placeholder="Search for instrument tokens" (ngModelChange)="searchStocks()"/>
+</div>
 <div>
     <table>
         <tr>
             <th>S.NO</th>
             <th>Tradable</th>
-            <th>Mode</th>
+            <!-- <th>Mode</th> -->
             <th>Instrument Token</th>
             <th>Last Price</th>
             <th>Last Traded Quantity</th>
@@ -14,16 +17,18 @@
             <!-- <th>OHLC</th> -->
             <th>Change</th>
             <th>Last Trade Time</th>
-            <th>Exchange Timestamp</th>
-            <th>Open Interest</th>
+            <!-- <th>Exchange Timestamp</th> -->
+            <!-- <th>Open Interest</th> -->
             <th>Open Interest Day High</th>
             <th>Open Interest Day Low</th>
+            <th>Alert Price</th>
             <th>Alert Prices</th>
         </tr>
         <tr *ngFor = "let stocks of selectedStocks;let i = index;">
             <td>{{i+1}}</td>
-            <td>{{stocks.tradable}}</td>
-            <td>{{stocks.mode}}</td>
+            <td><span *ngIf="stocks.tradable == true">Yes</span>
+                <span *ngIf="stocks.tradable == false">No</span></td>
+            <!-- <td>{{stocks.mode}}</td> -->
             <td>{{stocks.instrument_token}}</td>
             <td>{{stocks.last_price}}</td>
             <td>{{stocks.last_traded_quantity}}</td>
@@ -34,15 +39,14 @@
             <!-- <td>{{stocks.ohlc}}</td> -->
             <td>{{round(stocks.change,4)}}</td>
             <td>{{stocks.last_trade_time | date}}</td>
-            <td>{{stocks.exchange_timestamp | date}}</td>
-            <td>{{stocks.oi}}</td>
+            <!-- <td>{{stocks.exchange_timestamp | date}}</td> -->
+            <!-- <td>{{stocks.oi}}</td> -->
             <td>{{stocks.oi_day_high}}</td>
             <td>{{stocks.oi_day_low}}</td>
-            <td><button (click)="alertPrice(stocks)">Alert Price</button></td>
+            <td><span>{{stocks.alert_price}}</span>
+            <span *ngIf="stocks.alert_price == null">Not Set</span>
+            </td>
+            <td><button class="alert-button" (click)="alertPrice(stocks)">Alert Price</button></td>
         </tr>
     </table>
 </div>
-
-<ng-template #alertstockprice>
-
-</ng-template>

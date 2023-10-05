@@ -13,11 +13,12 @@ export class NseListComponent implements OnInit {
 NSEStocks:any = [];
 p = 1;
 selectedItems:any = [];
-
+alertStocks:any = [];
 constructor(private stocks:StocksService,private stockSocket: StockSocketsService){}
 ngOnInit(){
  this.getNSEStocks();
 //  this.getStocks();
+this.alertedStocks();
 }
 
 getNSEStocks(){
@@ -37,21 +38,34 @@ addingItems(data:any,i:any) {
   console.log(this.selectedItems);
 }
 
-getStocks() {
-  this.stockSocket.getStocks(this.selectedItems).subscribe((res:any)=>{
-    console.log(res);
-  },(error)=>{
-    console.log(error);
-  });
-}
-
 saveTOSend(){
   let data = {
      items : this.selectedItems,
-     user_id: localStorage.getItem('user_id')
+     user_id: localStorage.getItem('user_id'),
+     exchange:'NSE'
   }
   this.stocks.sendStocks(data).subscribe((res:any)=>{
     console.log(res);
   });
+}
+
+alertedStocks() {
+  this.stocks.alertedStocks().subscribe((res:any)=>{
+    console.log(res);
+    this.alertStocks = res;
+  });
+}
+
+checkAlertedStocks(i:any){
+  let data = this.NSEStocks[i];
+  let index = this.alertStocks.findIndex((res:any)=>{
+    return res.instrument_token == data.instrument_token;
+  });
+  if(index != -1){
+    return true;
+  }
+  else{
+    return false;
+  }
 }
 }

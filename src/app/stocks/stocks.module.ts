@@ -12,6 +12,8 @@ import { SelectedStocksComponent } from './selected-stocks/selected-stocks.compo
 import {MatDialogModule} from '@angular/material/dialog';
 import { AlertPriceComponent } from './alert-price/alert-price.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { StocksService } from '../services/stocks/stocks.service';
+import { SharedModule } from '../shared/shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -29,12 +31,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     NgxPaginationModule,
     MatDialogModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    SharedModule
   ],
   exports:[
     BseListComponent,
     NseListComponent,
-    StocksViewComponent
-  ]
+    StocksViewComponent,
+    // AlertPriceComponent
+  ],
+  providers:[StocksService]
 })
 export class StocksModule { }

@@ -20,7 +20,8 @@
         <!-- <td>{{data.expiry}}</td> -->
         <td>{{data.instrument_token}}</td>
         <td>{{data.segment}}</td>
-        <td><button [disabled]="data.isSelected" (click)="addingItems(data,i)">Set Alert</button></td>
+        <!-- <td *ngIf="checkAlertedStocks(i)"><button [disabled]="data.isSelected" (click)="addingItems(data,i)">Set Alert</button></td> -->
+        <td><button *ngIf="!checkAlertedStocks(i)" [disabled]="data.isSelected" (click)="addingItems(data,i)">Set Alert</button></td>
     </tr>
 </table>
 <pagination-controls (pageChange)="p = $event"></pagination-controls>

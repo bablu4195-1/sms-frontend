@@ -1,4 +1,7 @@
-<input type="number" [(ngModel)]="price" placeholder="Enter Price" value="{{price}}"/>
-<button (click)="addPrice(price)">Set Price</button>
-
-<button (click)="close()">Close</button>
+<div class="input-container">
+<input class="price-input" type="number" [(ngModel)]="price" placeholder="Enter Price" value="{{price}}"/>
+</div>
+<div class="dialog-buttons">
+    <button class="main-button" (click)="addPrice(price)">Set Price</button>
+    <button class="close-button" (click)="close()">Close</button>
+</div>

@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit{
     if (this.loginForm.valid) {
       // perform authentication...
       this.authService.login(this.loginForm.value).subscribe((res: any) => {
-        console.log(res);
+        // console.log(res);
         localStorage.setItem('token', res.token);
         localStorage.setItem('user_id', res.user_id);
         // navigate to stocks nse component
@@ -54,14 +54,15 @@ export class LoginComponent implements OnInit{
     const messaging = getMessaging();
     getToken(messaging, {vapidKey:environment.firebase.vapidkey}).then((currentToken) => {
       if(currentToken){
-        console.log(currentToken);
+        // console.log(currentToken);
         localStorage.setItem('fcm_token', currentToken);
         let data = {
           token: currentToken,
           user_id: localStorage.getItem('user_id')
         }
+        console.log(currentToken);
         this.sendFirstToken(data);
-        this.sendNotification();
+        this.sendNotification(data);
       }
       else{
         console.log('No registration token available. Request permission to generate one.');
@@ -78,13 +79,13 @@ export class LoginComponent implements OnInit{
     });
   }
  
-  sendNotification(){
-    let data = {
-      token: localStorage.getItem('fcm_token')
-    }
-    this.stocks.notification(data).subscribe((res:any)=>{
+  sendNotification(data:any){
+   let data1 = data;
+    this.stocks.notification(data1).subscribe((res:any)=>{
       console.log(res);
+    },(err)=>{
+      console.log(err);
     });
   }
-
+ 
     }

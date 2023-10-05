@@ -8,3 +8,31 @@ table>tr>th {
 table {
     text-align: center;
 }
+
+table > tr > th {
+    width: 100px;
+    padding: 5px;
+}
+table>tr>td {
+    border-bottom: 1px solid black;
+    border-right: 1px solid #fff;
+    background-color: #a1a111;
+    padding: 4px;
+}
+
+.alert-button {
+    background-color: rgb(22, 128, 6);
+    color: #fff;
+    border: 1px solid #fff;
+    border-radius: 10px;
+    cursor:pointer;
+}
+
+.search-container {
+    padding: 5px;
+}
+
+.search-bar {
+    padding: 5px;
+    width: 80%;
+}

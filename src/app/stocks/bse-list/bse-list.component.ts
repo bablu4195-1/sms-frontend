@@ -10,13 +10,14 @@ export class BseListComponent {
   BSEStocks:any = [];
   p = 1;
   selectedItems:any = [];
-  
+  alertStocks:any = [];
   constructor(private stocks:StocksService){}
   ngOnInit(){
-   this.getNSEStocks();
+   this.getBSEStocks();
+   this.alertedStocks();
   }
   
-  getNSEStocks(){
+  getBSEStocks(){
     this.stocks.getBSEStocks().subscribe((res:any)=>{
       console.log(res);
       this.BSEStocks = res;
@@ -31,8 +32,34 @@ export class BseListComponent {
     data.isSelected = true;
     this.selectedItems.push(data['instrument_token']);
   }
-  saveTOSend() {
-    console.log(localStorage.getItem('user_id'));
-    localStorage.getItem('token');
+  saveTOSend(){
+    let data = {
+       items : this.selectedItems,
+       user_id: localStorage.getItem('user_id'),
+       exchange:'BSE'
+    }
+    this.stocks.sendStocks(data).subscribe((res:any)=>{
+      console.log(res);
+    });
+    this.getBSEStocks();
+  }
+  alertedStocks() {
+    this.stocks.alertedStocks().subscribe((res:any)=>{
+      console.log(res);
+      this.alertStocks = res;
+    });
+  }
+  
+  checkAlertedStocks(i:any){
+    let data = this.BSEStocks[i];
+    let index = this.alertStocks.findIndex((res:any)=>{
+      return res.instrument_token == data.instrument_token;
+    });
+    if(index != -1){
+      return true;
+    }
+    else{
+      return false;
+    }
   }
 }
