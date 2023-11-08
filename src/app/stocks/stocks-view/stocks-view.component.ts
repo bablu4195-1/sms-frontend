@@ -22,6 +22,7 @@ export class StocksViewComponent implements OnInit {
 logout() {
   localStorage.removeItem('token');
   localStorage.removeItem('user_id');
+  localStorage.removeItem('fcm_token');
   this.router.navigate(['login']);
 }
 }

@@ -2,7 +2,6 @@ import { Component, OnInit, TemplateRef, ViewChild, WritableSignal, signal } fro
 import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
 import { StocksService } from 'src/app/services/stocks/stocks.service';
 import { AlertPriceComponent } from '../alert-price/alert-price.component';
-import { PriceComponent } from 'src/app/shared/shared/price/price.component';
 @Component({
   selector: 'app-selected-stocks',
   templateUrl: './selected-stocks.component.html',
@@ -29,6 +28,7 @@ export class SelectedStocksComponent implements OnInit {
     }
     selectedStocksList() {
       this.stocks.selectedStocks().subscribe((res: any) => {
+        console.log(res);
         this.selectedStocks = res;
         this.selectedStocks.forEach((data:any)=>{
           let index = this.alertStocks.findIndex((res:any)=>{
